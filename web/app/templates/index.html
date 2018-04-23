@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}千搜资源网 - 搜索全网BT种子,电驴,磁力链,迅雷资源{% endblock %}
+{% block meta %}
+<meta name="keywords" content="千搜资源,千搜,1000so,BT种子搜索,磁力链搜索,迅雷搜索" />
+<meta name="description" content="千搜资源网基于搜索引擎技术，自动收录全网影视、音乐、游戏、软件、电子书等各种基于BT种子、磁力链、电驴、迅雷、在线播放等资源，通过对这些资源做索引从而提供给用户方便的资源查找途径" />
+{% endblock %}
+{% block content %}
+<div id="zan-bodyer">
+  <div class="container">
+    <div class="row">
+      <div id='search-frm' class="col-md-6 col-md-offset-3">
+        <div class="d-ilogo"><a href="/"><img src="/static/images/f-logo.png" alt="千搜资源"></a></div>
+        <form name="search" method="get" action="/search">
+          <div class="input-group">
+            <input type="text" class="form-control" name="q">
+            <span class="input-group-btn">
+              <button class="btn btn-danger form-control" type="submit">
+                <span class="glyphicon glyphicon-search"></span>&nbsp;搜索
+              </button>
+            </span>
+          </div>
+        </form>
+        <div id='sugg'>
+          <span class='text-muted'>最新关键词：</span>
+          {% for kw in newest_kws %}
+            <a class='text-success' href="{{url_for('search', q = kw)}}">{{kw}}</a>
+          {% endfor %}
+        </div>
+      </div> <!-- search-frm md-6 -->
+    </div>
+    <div class='row'>
+      <div class='col-md-8 col-md-offset-2'>
+        <h4 class='text-success' style='text-align: center'>最新电影</h4>
+        {% include 'slide-wrap.html' %}
+      </div>
+    </div>
+    <section class="hidden-xs">
+      <h4 class='text-success' style='text-align: center'>
+        <a href="{{url_for('i_list')}}">最新收录资源</a>
+      </h4>
+      {% include 'slide_banner.html' %}
+    </section>
+    <div class='row'>
+      <div id='intro' class='col-md-8 col-md-offset-2'>
+        {% if recent_count > 0 %}
+          <h4>最近24小时收录资源数：<a class='text-danger' href="{{url_for('list')}}">{{recent_count}}</a></h4>
+        {% endif %}
+        <h3>关于千搜资源</h3>
+        <p>千搜资源网基于搜索引擎技术，自动收录全网影视、音乐、游戏、软件、电子书等各种基于BT种子、磁力链、电驴、迅雷、在线播放等资源，通过对这些资源做索引从而提供给用户方便的资源查找途径。</p>
+      </div>
+    </div> <!-- row -->
+  </div> <!-- container -->
+</div> <!-- bodyer -->
+{% endblock %}
+{% block page_footer %}
+<script>
+  jQuery.ajax({
+    type: 'GET',
+    url: '/recommend/slide'
+  }).done(function (res) {
+    jQuery('#slide_wrap').html(res)
+  })
+</script>
+{% endblock %}

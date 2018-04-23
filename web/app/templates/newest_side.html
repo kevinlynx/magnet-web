@@ -1,0 +1,23 @@
+<aside id="zan_hotest_posts-2">      
+  <div class="panel panel-zan hot hidden-xs">
+    <div class="panel-heading">
+      <h2><a href="{{url_for('i_list', p = 0)}}"><i class="fa fa-fire"></i>最新收录影视</a></h2>
+    </div>
+    <br>
+    {% for as in split_list(newest, 3) %}
+      <div class='row'>
+        {% for a in as %}
+          <div class='col-xs-4 col-md-4'>
+            <a href="{{url_for('view', id = a.id)}}" title='{{a.title}}' class='s-thumbnail'>
+              <img src="{{url_for('get_img', id = a.id)}}" alt="{{a.title}}">
+                <div class="caption">
+                  <span class='max-lines'>{{a.title}}</span>
+                </div>
+            </a>
+          </div>
+        {% endfor %}
+      </div>
+    {% endfor %}
+  </div>
+</aside>
+

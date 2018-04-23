@@ -1,0 +1,17 @@
+{% for as in split_list(articles, 4) %}
+  <div class='row'>
+    {% for a in as %}
+    <div class='col-xs-6 col-md-3'>
+      <a href="{{url_for('view', id = a.id)}}" title='{{a.title}}' class='thumbnail'>
+        <img class='lazy' data-original="{{url_for('get_img', id = a.id)}}" alt="{{a.title}}">
+        <div class="caption">
+          <span class='max-lines'>
+            {{a.title}}
+          </span>
+        </div>
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+{% endfor %}
+

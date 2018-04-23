@@ -1,0 +1,33 @@
+<aside class="col-md-4" id="sidebar">
+    <aside id="zan_search-2" class='visible-xs'>
+      <div class="search">
+         <form class="form-inline clearfix" method="get" id="searchform" action="/search">
+            <input class="form-control" type="text" name="q" id="s" placeholder="搜索..." value='{{q}}'>
+            <button type="submit" class="btn btn-danger btn-small"><i class="fa fa-search"></i></button>
+         </form>
+       </div>
+    </aside>
+    {% if not is_i_list() %}
+      {% include 'newest_side.html' %}
+    {% else %}
+    <aside id="zan_hotest_posts-2">      
+      <div class="panel panel-zan hot hidden-xs">
+        <div class="panel-heading">
+          <h2><a href="{{url_for('list', p = 0)}}"><i class="fa fa-fire"></i>最新收录资源</a></h2>
+        </div>
+        <ul class="list-group list-group-flush">
+          {% for a in newest %}
+            <li class="list-group-item">
+              <span class="post-title">
+                <a href="{{url_for('view', id = a.id)}}">{{a.title}}</a>
+              </span>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </aside>
+    {% endif %}
+    {% if related %}
+      {% include 'related.html' %}
+    {% endif %}
+</aside>

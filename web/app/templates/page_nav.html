@@ -1,0 +1,14 @@
+<div id="zan-page" class="clearfix">
+  <ul class="pagination pagination-zan pull-right">
+    {% if page_nav.start > 0 %}
+      <li><a href='{{page_nav.format_url(page_nav.start - 1)}}'>«</a></li>
+    {% endif %}
+    {% for p in range(page_nav.start, page_nav.end) %}
+      {% if p == page_nav.cur %}
+        <li class='active'><a href='{{page_nav.format_url(p)}}'>{{ p + 1 }}</a></li>
+      {% else %}
+        <li><a href='{{page_nav.format_url(p)}}'>{{ p + 1 }}</a></li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</div>

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}千搜资源网{% endblock %}
+{% block meta %}
+<meta name="keywords" content="千搜资源,千搜,1000so" />
+<meta name="description" content="千搜资源{{code}}" />
+{% endblock %}
+{% block content %}
+<div id="zan-bodyer">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2">
+        <img src='/static/images/404.JPG'></img>
+      </div>
+      <div id="mainstay" class="col-md-8">
+        <div class='alert alert-danger'>
+          {% if code == 404 %}
+          <h3>页面未找到</h3>
+          <a href="{{url_for('index')}}">>> 返回首页</a>
+          {% else %}
+          <h3>网站出现错误，请稍后重试</h3>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

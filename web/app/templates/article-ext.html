@@ -1,0 +1,11 @@
+<div class="panel panel-zan">
+    <div class="panel-heading"><h2>下载链接</h2><span class='pull-right'>建议安装最新版本迅雷下载</span></div>
+    <div class="panel-body">
+      {% for link in article.link %}
+        <a class='btn btn-default btn-xs download' target='_self' href='{{link.href}}'>
+          {% if link.text %}{{link.text}}{% else %}下载{% endif %}
+        </a>
+      {% endfor %}
+    </div>
+</div>
+{% include 'ext/xunlei.html' %}

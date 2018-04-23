@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="/static/css/bootstrap.css" type="text/css" />
+<link rel="stylesheet" href="/static/css/flat/red.css" type="text/css" />
+<link rel="stylesheet" href="/static/css/core.css" type="text/css" />
+<link rel="stylesheet" href="/static/css/style.css" type="text/css" />
+<link rel="stylesheet" href="/static/font-awesome/css/font-awesome.min.css" type="text/css" />
+<title>{% block title %}{% endblock %}</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+{% block meta %}{% endblock %}
+</head>
+<body>
+  <header id="zan-header" class="navbar navbar-inverse">
+  <nav class="container">
+    <a href="/"><div class="navbar-brand"></div></a>
+    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="fa fa-reorder fa-lg"></span>
+    </button>
+    <div class="navbar-collapse bs-navbar-collapse collapse">
+        <ul id="menu-navbar" class="nav navbar-nav">
+            <li class="dropdown menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children">
+              <a><i class="fa fa-caret-square-o-right"></i> 发现电影</a>
+              <ul class="dropdown-menu">
+	            <li class="menu-item">
+                  <a href="{{url_for('expl', type = 'movie', tag = '热门')}}"><i class="fa fa-fire"></i>&nbsp;热门</a>
+                </li>
+	            <li class="menu-item">
+                  <a href="{{url_for('expl', type = 'movie', tag = '最新')}}"><i class="fa fa-bolt"></i>&nbsp;最新</a>
+                </li>
+	            <li class="menu-item">
+                  <a href="{{url_for('expl', type = 'movie', tag = '动作')}}">动作</a>
+                </li>
+	            <li class="menu-item">
+                  <a href="{{url_for('expl', type = 'movie', tag = '女性')}}">女性</a>
+                </li>
+	            <li class="menu-item">
+                  <a href="{{url_for('expl', type = 'movie', tag = '情色')}}">情色</a>
+                </li>
+	            <li class="menu-item">
+                  <a href="{{url_for('expl', type = 'movie', tag = '喜剧')}}">喜剧</a>
+                </li>
+              </ul>
+            </li>
+            <li class="dropdown menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children">
+              <a><i class="fa fa-external-link-square"></i> 发现电视剧</a>
+              <ul class="dropdown-menu">
+	            <li class="menu-item">
+                  <a href="{{url_for('expl', type = 'tv', tag = '热门')}}"><i class="fa fa-fire"></i>&nbsp;热门</a>
+                </li>
+	            <li class="menu-item">
+                  <a href="{{url_for('expl', type = 'tv', tag = '美剧')}}"><i class="fa fa-credit-card-alt"></i>&nbsp;美剧</a>
+                </li>
+              </ul>
+            </li>
+            <li class='menu-item menu-item-type-custom menu-item-object-custom menu-item-home {{nav_css("/ilist")}}'>
+              <a href="{{url_for('i_list')}}"><i class="fa fa-film"></i>&nbsp;最新收录影视</a>
+            </li>
+            <li class='menu-item menu-item-type-custom menu-item-object-custom menu-item-home {{nav_css("/list")}}'>
+              <a href="{{url_for('list')}}"><i class="fa fa-fire"></i>&nbsp;最新收录资源</a>
+            </li>
+        </ul>
+        {% if not is_index() %}
+        <div class="col-sm-4 pull-right hidden-xs">
+            <form class="navbar-form" role="search" action="{{url_for('search')}}">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="找资源" name="q" value="{{q}}">
+              <span class="input-group-btn">
+                <button class="btn btn-danger form-control" type="submit">
+                  <span class="glyphicon glyphicon-search"></span>&nbsp;搜索
+                </button>
+              </span>
+            </div>
+          </form>
+        </div>
+        {% endif %}
+    </div>
+  </nav>
+  <div id="if-fixed" class="pull-right visible-lg visible-md">
+    <i class="fa fa-thumb-tack"></i>
+    <input type="checkbox">
+  </div>
+  </header>
+  {% block content %}{% endblock %}
+
+  <footer id="zan-footer">
+	<div class="container">
+      千搜资源网所有数据通过程序技术自动生成，并不存储资源。
+      <div>
+        友情链接：	
+	<a href="http://www.1000so.me" target="_blank">千搜资源</a>
+      </div>
+      <div>
+        Copyright &nbsp;&copy; 2016 千搜资源 - <a href='#'>联系站长&nbsp;</a>
+        {% include 'ext/stat.html' %}
+      </div>
+	</div>
+  </footer>
+
+  <div id="zan-gotop">
+	<i class="fa fa-angle-up"></i>
+  </div>
+
+  <script src="/static/js/jquery.js"></script> 
+  <script src="/static/js/jquery.icheck.js"></script> 
+  <script src="/static/js/jquery-migrate.min.js"></script> 
+  <script src="/static/js/bootstrap.min.js"></script> 
+  <script src="/static/js/zanblog.min.js"></script> 
+  <script src="/static/js/app.js"></script> 
+
+  <script src="/static/js/jquery.lazyload.min.js"></script> 
+  <script>
+    jQuery("img.lazy").lazyload();
+  </script>
+  {% block page_footer %}{% endblock %}
+</body>
+</html>
+

@@ -1,0 +1,14 @@
+<div class='row'>
+{% for a in articles %}
+<div class='col-xs-4 col-md-2'>
+  <a href="{{url_for('view', id = a.id)}}" title='{{a.title}}' class='thumbnail'>
+    <img class='lazy' data-original="{{url_for('get_img', id = a.id)}}" alt="{{a.title}}">
+    <div class="caption">
+      <span class='max-lines'>
+        {{a.title}}
+      </span>
+    </div>
+  </a>
+</div>
+{% endfor %}
+</div>

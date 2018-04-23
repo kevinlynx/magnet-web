@@ -1,0 +1,17 @@
+
+<aside id="zan_hotest_posts-2">      
+  <div class="panel panel-zan hot hidden-xs">
+    <div class="panel-heading">
+      <h2><a href="{{url_for('search', q = related_kw)}}"><i class="fa fa-star"></i>相关资源</a></h2>
+    </div>
+    <ul class="list-group list-group-flush">
+      {% for a in related %}
+        <li class="list-group-item">
+          <span class="post-title">
+            <a href="{{url_for('view', id = a.id)}}">{{a.title}}</a>
+          </span>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</aside>

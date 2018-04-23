@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}千搜资源网最新收录资源 - 第{{page_nav.cur + 1}}页 - 千搜资源网{% endblock %}
+{% block meta %}
+<meta name="keywords" content="最新BT资源,最新磁力资源,最新迅雷资源,千搜资源,千搜,1000so" />
+<meta name="description" content="千搜资源网最新收录BT资源，磁力链接资源，迅雷下载资源，当前第{{page_nav.cur + 1}}页" />
+{% endblock %}
+{% block content %}
+<div id="zan-bodyer">
+  <div class="container">
+    <div class="row">
+      <div id="mainstay" class="col-md-8">
+        {% include 'ext/notice.html' %}
+        <div>
+          <div class="panel panel-zan hot">
+            <div class="panel-heading">
+              <i class="fa fa-fire"></i><h2>最新收录资源
+                {% if page_nav.cur > 0 %}
+                &nbsp;第{{page_nav.cur + 1}}页
+                {% endif %}
+              </h2>
+            </div>
+            <ul class="list-group list-group-flush">
+              {% for article in articles %}
+              <li class="list-group-item">
+                <span class="post-title">
+                  <a href="{{url_for('view', id = article.id)}}">{{article.title}}</a>
+                </span>
+                <span class='pull-right hidden-xs'>
+                  {% if article.is_updated %}
+                    <i class='text-danger'>{{article.updated_at | date_brief }}</i>
+                  {% else %}
+                    <i>{{article.updated_at | date_brief }}</i>
+                  {% endif %}
+                </span>
+              </li>
+              {% endfor %}
+            </ul>
+          </div> <!-- panel -->
+          {% include 'page_nav.html' %}
+        </div>
+      </div> <!-- mainstay -->
+      {% include 'side.html' %}
+    </div>
+  </div>
+</div>
+{% endblock %}

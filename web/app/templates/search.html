@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}搜索：{{q}} - {{q}}BT下载 - {{q}}磁力下载 - {{q}}迅雷下载 - 千搜资源网{% endblock %}
+{% block meta %}
+<meta name="keywords" content="{{q}},{{q}}BT下载,{{q}}磁力下载,{{q}}迅雷下载,千搜资源,千搜,1000so" />
+<meta name="description" content="通过千搜资源搜索{{q}}，获得{{hits}}结果" />
+{% endblock %}
+{% block content %}
+<div id="zan-bodyer">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        {% include 'ext/notice.html' %}
+        <article class="article well clearfix">
+          <div class="breadcrumb">
+	        <i class="fa fa-search"></i> 
+            <h3 class='search-tip text-success'>搜索：<b>{{q}}</b></h3>，找到<b class='text-danger'>{{hits}}</b>个结果，耗时{{qtime}}ms
+          </div>
+          {% for article in articles %}
+          <div class='result'>
+            {% autoescape false %}
+              <h3>
+                <a target='_blank' href="{{url_for('view', id = article.id)}}">{{article.hl_title}}</a>
+              </h3>
+            {% endautoescape %}
+            <div class='row'>
+              <div class='search_thumb' data-id='{{article.id}}' data-title='{{article.title}}'></div>
+              <div class='col-md-12' id='detail-{{article.id}}'>
+                {% autoescape false %}
+                  <div class='abstract'>
+                    {{article.content}}
+                  </div>
+                {% endautoescape %}
+                <div class='info'>
+                  <span class='text-muted'>{{article.updated_at | date_brief }}</span>-
+                  <span class='text-success'>资源类型：{% include 'link_type.html' %}</span>-
+                  <span class='text-danger'>资源数：{{article.link_str | length}}</span>
+                </div>
+              </div> <!-- md-10 -->
+            </div> <!-- row -->
+          </div>
+          {% endfor %}
+		</article>
+        {% include 'page_nav.html' %}
+      </div>
+      {% include 'side.html' %}
+    </div> <!-- row -->
+  </div> <!-- container -->
+</div> <!-- bodyer -->
+{% endblock %}
+{% block page_footer %}
+{% if articles %}
+<script>
+  jQuery(load_search_thumb)
+</script>
+{% endif %}
+{% endblock %}

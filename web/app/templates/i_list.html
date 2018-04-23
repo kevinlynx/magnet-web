@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}千搜资源网最新收录影视资源 - 第{{page_nav.cur + 1}}页 - 千搜资源网{% endblock %}
+{% block meta %}
+<meta name="keywords" content="最新BT影视,最新磁力影视,最新迅雷影视,千搜资源,千搜,1000so" />
+<meta name="description" content="千搜资源网最新收录BT影视，磁力链接影视，迅雷下载影视，当前第{{page_nav.cur + 1}}页" />
+{% endblock %}
+{% block content %}
+<div id="zan-bodyer">
+  <div class="container">
+    <div class="row">
+      <div id="mainstay" class="col-md-8">
+        {% include 'ext/notice.html' %}
+        <div>
+          <div class="panel panel-zan hot">
+            <div class="panel-heading">
+              <i class="fa fa-fire"></i>
+              <h2>最新收录影视
+                {% if page_nav.cur > 0 %}
+                &nbsp;第{{page_nav.cur + 1}}页
+                {% endif %}
+              </h2>
+            </div>
+            <br>
+            {% include 'i_list_thumb.html' %}  
+          </div> <!-- panel -->
+          {% include 'page_nav.html' %}
+        </div>
+      </div> <!-- mainstay -->
+      {% include 'side.html' %}
+    </div>
+  </div>
+</div>
+{% endblock %}

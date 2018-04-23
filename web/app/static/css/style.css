@@ -1,0 +1,144 @@
+.navbar-nav {
+    float: left;
+}
+
+.download {
+    margin: 2px 1px;
+    color: blue;
+}
+
+.panel-heading a {
+    color: white;
+}
+
+.line_wrap {
+    margin: 15px;
+}
+
+.line_02{
+    height: 1px;
+    border-top: 1px solid #ddd;
+    text-align: center;
+}
+.line_02 span{
+    position: relative;
+    top: -8px;
+    background: #fff;
+    padding: 0 20px;
+}
+.panel-body .btn {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 95%;
+}
+
+/* only for SEO */
+.panel-heading h2 {
+    border-bottom: none;
+    font-size: 14px;
+    line-height: 14px;
+    font-weight: normal;
+    margin: 3px;
+    display: inline;
+    font-family: "Microsoft Yahei", Helvetica, Arial, sans-serif;
+}
+
+span.hl {
+    color: red;
+}
+
+.result h3 {
+    width: 80%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: inline-block;
+    white-space:nowrap;
+    font-size: 20px;
+}
+
+.result a {
+    color: blue;
+}
+
+.result .abstract {
+    font-size: 14px;
+    margin: 5px;    
+}
+
+.result .info {
+    margin: 5px;    
+}
+
+.search-tip {
+    display: inline;
+}
+
+#search-frm {
+    min-height: 200px;
+}
+
+#intro {
+    text-align: center;
+}
+
+#zan-footer {
+    padding: 30px;
+}
+
+.d-ilogo {
+    text-align: center;
+    margin: 20px;
+}
+
+#sugg {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.tips {
+    text-align: center;
+}
+
+/* for thumbnail */
+.thumbnail img {
+    height: 205px;
+    width: 140px;
+}
+
+.caption p {
+    text-align: center;
+    overflow: hidden;
+    width: 100%;
+    display: inline-block;
+    font-size: 12px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin: 0;
+}
+
+.max-lines {
+  display: block; /* or inline-block */
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  overflow: hidden;
+  max-height: 3.6em;
+  line-height: 1.8em;
+}
+
+.s-thumbnail img {
+    height: 137px;
+    width: 93px;
+}
+
+#zan_hotest_posts-2 .row {
+    margin-left: -10px;
+    margin-right: -10px;
+}
+
+.input-group-btn button {
+    min-width: 60px; /* fix firefox issue */
+}
+
+.carousel-control {
+    width: 10%; /* override 15% in bootstrap */
+}

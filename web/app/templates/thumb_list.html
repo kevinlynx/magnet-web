@@ -1,0 +1,23 @@
+<div class="well fade in alert alert-info tips">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  {% if results %}
+    豆瓣上最新最热的影视剧基本都能在<b>千搜资源</b>网上搜索到
+  {% else %}
+    Oops, something goes wrong~~
+  {% endif %}
+</div>
+<div class='row'>
+  {% for m in results %}
+    <div class='col-xs-6 col-md-3'>
+      <a href="{{url_for('search', q = m.title)}}" class='thumbnail'>
+        <img src="{{m.cover}}" alt="{{m.title}}">
+        <div class="caption">
+          <p>
+            <span>{{m.title}}</span>&nbsp;<span class='text-danger'>{{m.rate}}</span>
+          </p>
+        </div>
+      </a>
+    </div>
+  {% endfor %}
+</div>
+

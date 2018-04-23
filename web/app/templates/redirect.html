@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}{{article.title}} - 千搜资源网{% endblock %}
+{% block meta %}
+<meta name="keywords" content="{{','.join(article.keyword)}},千搜资源,千搜,1000so" />
+<meta name="description" content="{{article.text_content[:150]}}" />
+<meta name="ext_keywords" content="{{','.join(article.ext_keyword)}}" />
+<meta http-equiv="refresh" content="5; url={{article.url}}" />
+{% endblock %}
+{% block content %}
+<div id="zan-bodyer">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <h4>受相关版权限制，该资源不予显示，5秒后跳转到原收录网址：
+          <a href='{{article.url}}'>立即跳转</a>
+        </h4>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

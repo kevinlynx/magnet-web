@@ -1,0 +1,12 @@
+<div class="content-article">					
+  <div class="alert alert-success">
+    {% autoescape false %}
+      {% if article.content %}
+        {{ article.content }}
+      {% endif %}
+    {% endautoescape %}
+    <div class="hidden">
+      {{article.ext_content}}
+    </div>
+  </div>
+</div>

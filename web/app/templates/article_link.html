@@ -1,0 +1,17 @@
+<!-- dynamically loaded in movie page -->
+{% if article.link_online %}
+<div class='line_wrap'><div class='line_02'><span>在线观看</span></div></div>
+{% endif %}
+{% for link in article.link_online %}
+<a class='btn btn-default btn-xs download' target='_blank' href='{{link.href}}'>
+  {% if link.text %}{{link.text}}{% else %}播放{% endif %}
+</a>
+{% endfor %}
+{% if article.link_download %}
+<div class='line_wrap'><div class='line_02'><span>下载</span></div></div>
+{% endif %}
+{% for link in article.link_download %}
+<a class='btn btn-default btn-xs download' target='_blank' href='{{link.href}}'>
+  {% if link.text %}{{link.text}}{% else %}下载{% endif %}
+</a>
+{% endfor %}

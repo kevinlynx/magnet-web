@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}{{article.title}} - 千搜资源网{% endblock %}
+{% block meta %}
+<meta name="keywords" content="{{','.join(article.keyword)}},千搜资源,千搜,1000so" />
+<meta name="description" content="{{article.text_content[:150]}}" />
+<meta name="ext_keywords" content="{{','.join(article.ext_keyword)}}" />
+{% endblock %}
+{% block content %}
+<div id="zan-bodyer">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <article class="article well clearfix">
+          {% include 'article.html' %}
+          <div>
+            <span title="收录于{{article.created_at | date_brief}}" 
+              {% if is_today(article.updated_at) %}
+                class='text-danger'
+              {% else %}
+                class='text-muted'
+              {% endif %}
+            >更新于{{article.updated_at | date_brief}}</span>
+            <div class='clearfix pull-right' id='bdshare'>
+              {% include 'ext/share.html' %}
+            </div>
+          </div>
+		</article>
+        {% include 'article-ext.html' %}
+        {% include 'article-content.html' %}
+	  </div>
+      {% include 'side.html' %}
+	</div>
+  </div>
+</div>
+{% endblock %}

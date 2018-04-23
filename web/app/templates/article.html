@@ -1,0 +1,23 @@
+<section class="hidden-xs">
+    <div class="title-article">
+      <h2><a href="{{url_for('view', id = article.id)}}">{{article.title}}</a></h2>
+    </div>
+    <div class="tag-article">
+      {% if is_debug() %}
+      <a href='{{article.url}}' target='_blank'>
+        <span class='label label-zan'><i class='fa fa-link'></i>来源</span>
+      </a>
+      {% endif %}
+      {% for k in article.ext_keyword %} 
+        <a href="{{url_for('search', q = k)}}">
+          <span class="label label-success"><i class="fa fa-eye"></i>{{k}}</span>
+        </a>
+      {% endfor %}
+    </div>
+</section>
+<section class="visible-xs">
+    <div class="title-article">
+        <h4><a href="{{url_for('view', id = article.id)}}">{{article.title}}</a></h4>
+    </div>
+</section>
+

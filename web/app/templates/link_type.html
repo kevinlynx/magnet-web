@@ -1,0 +1,15 @@
+{% for t in article.get_link_types() %}
+  {% if t == 'magnet' %}
+    <i class='fa fa-magnet' title='磁力'></i> 磁力
+  {% elif t == 'ed2k' %}
+    <i class='fa fa-magnet' title='电驴'></i> 电驴
+  {% elif t == 'thunder' %}
+    <i class='fa fa-flash' title='迅雷'></i> 迅雷
+  {% elif t == 'ftp' %}
+    <i class='fa fa-upload' title='FTP'></i> FTP
+  {% elif t == 'torrent' %}
+    <i class='fa fa-btc' title='BT种子'></i> BT
+  {% else %}
+    其他
+  {% endif %}
+{% endfor %}
