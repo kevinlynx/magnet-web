@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<httpcollector id="magnet">
+
+  #set($http = "com.norconex.collector.http")
+  #set($core = "com.norconex.collector.core")
+  #set($urlNormalizer   = "${http}.url.impl.GenericURLNormalizer")
+  #set($filterExtension = "${core}.filter.impl.ExtensionReferenceFilter")
+  #set($filterRegexRef = "${core}.filter.impl.RegexReferenceFilter")
+  #set($rootdir = "./magnet")
+  #set($solr_url = "http://localhost:8983/solr/magnet")
+  #set($db_user = "kl")
+  #set($db_pwd = "d6Pass")
+  #set($db_url = "jdbc:mysql://mysql/magnet?useUnicode=true&amp;characterEncoding=utf-8")
+  #set($commitBatchSize = 20)
+  #set($queueSize = 50)
+
+  <!-- Decide where to store generated files. -->
+  <progressDir>$rootdir/progress</progressDir>
+  <logsDir>$rootdir/logs</logsDir>
+
+  <crawlerDefaults>
+    <urlNormalizer class="$urlNormalizer" />
+    <numThreads>2</numThreads>
+    <!-- Put a maximum depth to avoid infinite crawling (e.g. calendars). -->
+    <maxDepth>10</maxDepth>
+
+    <!-- We know we don't want to crawl the entire site, so ignore sitemap. -->
+    <!-- Before 2.3.0: -->
+    <sitemap ignore="true" />
+    <!-- Since 2.3.0: -->
+    <sitemapResolverFactory ignore="true" />
+
+    <!-- Be as nice as you can to sites you crawl. -->
+    <delay default="3000" />
+    <userAgent>Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36</userAgent>
+
+    <referenceFilters>
+      <filter class="$filterExtension" onMatch="exclude">rss,jpg,gif,png,ico,css,js</filter>
+    </referenceFilters>
+
+    <!-- after get HEAD meta, only fetch these html pages -->
+    <metadataFilters>
+      <filter class="com.norconex.collector.core.filter.impl.RegexMetadataFilter"
+              onMatch="exclude"
+              caseSensitive="false"
+              field="Content-Type">application.*</filter>
+    </metadataFilters>        
+
+    <!-- Document importing -->
+    <importer>
+      <documentParserFactory class="com.norconex.importer.parser.GenericDocumentParserFactory" >
+          <ignoredContentTypes>text/html</ignoredContentTypes>
+      </documentParserFactory>
+      <postParseHandlers>
+          <transformer class="com.codemacro.magnet.DocumentFilter">
+            <!-- used for `ftp://` or HEAD file -->
+            <extension>torrent,avi,rmvb,rm,asf,divx,mpg,mpeg,mpe,wmv,mp4,mkv,vob,wma,mp3,wav,mid,rar,zip,iso,srt,ass,ssa,smi,sub,psb,usf,ssf,dvd,ogg,oga</extension>
+            <!-- links contains text below maybe HEAD for detail -->
+            <link_suspect_text>torrent,种子,附件</link_suspect_text>
+            <dynamic_delay>500</dynamic_delay>
+            <utf8Check>false</utf8Check>
+          </transformer>
+          <tagger class="com.norconex.importer.handler.tagger.impl.KeepOnlyTagger">
+            <fields>title,keyword,html_content,link,linkStr,id,document.reference</fields>
+          </tagger>
+          <!-- filter these invalid documents -->
+          <filter class="com.norconex.importer.handler.filter.impl.EmptyMetadataFilter"
+              onMatch="exclude"
+              fields="title,linkStr">
+          </filter>
+      </postParseHandlers>
+      </importer> 
+  </crawlerDefaults>
+  
+  <crawlers>
+    <crawler id="kanmeiju.net">
+      <startURLs stayOnDomain="true" stayOnPort="true" stayOnProtocol="true">
+        <url>http://kanmeiju.net/</url>
+      </startURLs>
+      <workDir>$rootdir/kanmeiju.net</workDir>
+      <committer class="com.codemacro.magnet.Committer">
+        #parse("committer-share.xml")
+        <queueDir>$rootdir/committer-queue/kanmeiju.net</queueDir>
+      </committer>
+    </crawler>
+    <crawler id="ed2000.com">
+      <startURLs stayOnDomain="true" stayOnPort="true" stayOnProtocol="true">
+        <url>http://www.ed2000.com/</url>
+      </startURLs>
+      <workDir>$rootdir/ed2000.com</workDir>
+      <committer class="com.codemacro.magnet.Committer">
+        #parse("committer-share.xml")
+        <queueDir>$rootdir/committer-queue/ed2000.com</queueDir>
+      </committer>
+    </crawler>
+    <!--crawler id="mp4ba.com">
+      <startURLs stayOnDomain="true" stayOnPort="true" stayOnProtocol="true">
+        <url>http://www.mp4ba.com/</url>
+      </startURLs>
+      <workDir>$rootdir/mp4ba.com</workDir>
+      <committer class="com.codemacro.magnet.Committer">
+        #parse("committer-share.xml")
+        <queueDir>$rootdir/committer-queue/mp4ba.com</queueDir>
+      </committer>
+    </crawler-->
+    <crawler id="rs05.com">
+      <startURLs stayOnDomain="true" stayOnPort="true" stayOnProtocol="true">
+        <url>http://www.rs05.com/</url>
+      </startURLs>
+      <workDir>$rootdir/rs05.com</workDir>
+      <committer class="com.codemacro.magnet.Committer">
+        #parse("committer-share.xml")
+        <queueDir>$rootdir/committer-queue/rs05.com</queueDir>
+      </committer>
+    </crawler>
+    <crawler id="renrenzy.com">
+      <startURLs stayOnDomain="true" stayOnPort="true" stayOnProtocol="true">
+        <url>http://www.renrenzy.com/</url>
+      </startURLs>
+      <workDir>$rootdir/renrenzy.com</workDir>
+      <committer class="com.codemacro.magnet.Committer">
+        #parse("committer-share.xml")
+        <queueDir>$rootdir/committer-queue/renrenzy.com</queueDir>
+      </committer>
+    </crawler>
+    <crawler id="dytt8">
+      <startURLs stayOnDomain="true" stayOnPort="true" stayOnProtocol="true">
+          <url>http://www.dytt8.net</url>
+      </startURLs>
+      <workDir>$rootdir/dytt8</workDir>
+      <committer class="com.codemacro.magnet.Committer">
+        #parse("committer-share.xml")
+        <queueDir>$rootdir/committer-queue/dytt8</queueDir>
+      </committer>
+    </crawler>
+    <crawler id="dygang.com">
+      <startURLs stayOnDomain="true" stayOnPort="true" stayOnProtocol="true">
+          <url>http://www.dygang.com/</url>
+      </startURLs>
+      <workDir>$rootdir/dygang.com</workDir>
+      <committer class="com.codemacro.magnet.Committer">
+        #parse("committer-share.xml")
+        <queueDir>$rootdir/committer-queue/dygang.com</queueDir>
+      </committer>
+    </crawler>
+    <crawler id="1000fr">
+      <startURLs stayOnDomain="true" stayOnPort="true" stayOnProtocol="true">
+          <url>http://www.1000fr.net</url>
+      </startURLs>
+      <workDir>$rootdir/1000fr</workDir>
+      <committer class="com.codemacro.magnet.Committer">
+        #parse("committer-share.xml")
+        <queueDir>$rootdir/committer-queue/1000fr</queueDir>
+      </committer>
+      <referenceFilters>
+        <filter class="$filterExtension" onMatch="exclude">rss,jpg,gif,png,ico,css,js</filter>
+        <filter class="$filterRegexRef" onMatch="exclude">page=[^1]$</filter>
+      </referenceFilters>
+    </crawler>
+    <crawler id="piaohua.com">
+      <startURLs stayOnDomain="true" stayOnPort="true" stayOnProtocol="true">
+          <url>http://www.piaohua.com/</url>
+      </startURLs>
+      <workDir>$rootdir/piaohua.com</workDir>
+      <committer class="com.codemacro.magnet.Committer">
+        #parse("committer-share.xml")
+        <queueDir>$rootdir/committer-queue/piaohua.com</queueDir>
+      </committer>
+    </crawler>
+    <crawler id="6vhao">
+      <startURLs stayOnDomain="true" stayOnPort="true" stayOnProtocol="true">
+          <url>http://www.6vhao.com/</url>
+      </startURLs>
+      <workDir>$rootdir/6vhao</workDir>
+      <committer class="com.codemacro.magnet.Committer">
+        #parse("committer-share.xml")
+        <queueDir>$rootdir/committer-queue/6vhao</queueDir>
+      </committer>
+    </crawler>
+    <crawler id="dy2018">
+      <startURLs stayOnDomain="true" stayOnPort="true" stayOnProtocol="true">
+          <url>http://www.dy2018.com/</url>
+      </startURLs>
+      <workDir>$rootdir/dy2018</workDir>
+      <committer class="com.codemacro.magnet.Committer">
+        #parse("committer-share.xml")
+        <queueDir>$rootdir/committer-queue/dy2018</queueDir>
+      </committer>
+    </crawler>
+    <crawler id="gaoqing">
+      <startURLs stayOnDomain="true" stayOnPort="true" stayOnProtocol="true">
+          <url>http://gaoqing.la/</url>
+      </startURLs>
+      <workDir>$rootdir/gaoqing</workDir>
+      <committer class="com.codemacro.magnet.Committer">
+        #parse("committer-share.xml")
+        <queueDir>$rootdir/committer-queue/gaoqing</queueDir>
+      </committer>
+    </crawler>
+  </crawlers>
+
+</httpcollector>

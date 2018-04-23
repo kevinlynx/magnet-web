@@ -1,0 +1,9 @@
+<solrURL>$solr_url</solrURL>
+<commitDisabled>false</commitDisabled>
+<solrUpdateURLParams></solrUpdateURLParams>
+<sourceReferenceField keep="false">id</sourceReferenceField>
+<commitBatchSize>$commitBatchSize</commitBatchSize>
+<queueSize>$queueSize</queueSize>
+<db_username>$db_user</db_username>
+<db_password>$db_pwd</db_password>
+<db_url>$db_url</db_url>
