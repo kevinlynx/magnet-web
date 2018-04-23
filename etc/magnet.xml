@@ -167,36 +167,6 @@
         <queueDir>$rootdir/committer-queue/piaohua.com</queueDir>
       </committer>
     </crawler>
-    <crawler id="6vhao">
-      <startURLs stayOnDomain="true" stayOnPort="true" stayOnProtocol="true">
-          <url>http://www.6vhao.com/</url>
-      </startURLs>
-      <workDir>$rootdir/6vhao</workDir>
-      <committer class="com.codemacro.magnet.Committer">
-        #parse("committer-share.xml")
-        <queueDir>$rootdir/committer-queue/6vhao</queueDir>
-      </committer>
-    </crawler>
-    <crawler id="dy2018">
-      <startURLs stayOnDomain="true" stayOnPort="true" stayOnProtocol="true">
-          <url>http://www.dy2018.com/</url>
-      </startURLs>
-      <workDir>$rootdir/dy2018</workDir>
-      <committer class="com.codemacro.magnet.Committer">
-        #parse("committer-share.xml")
-        <queueDir>$rootdir/committer-queue/dy2018</queueDir>
-      </committer>
-    </crawler>
-    <crawler id="gaoqing">
-      <startURLs stayOnDomain="true" stayOnPort="true" stayOnProtocol="true">
-          <url>http://gaoqing.la/</url>
-      </startURLs>
-      <workDir>$rootdir/gaoqing</workDir>
-      <committer class="com.codemacro.magnet.Committer">
-        #parse("committer-share.xml")
-        <queueDir>$rootdir/committer-queue/gaoqing</queueDir>
-      </committer>
-    </crawler>
   </crawlers>
 
 </httpcollector>
